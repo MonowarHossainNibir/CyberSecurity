@@ -4,6 +4,9 @@ Layer Security over HTTP
 
 On linux terminal inside VirtualBox the following commands need to be given to generate Transport Layer
 Security over HTTP:
+
+
+
 1. Preparing the environment
 Moving to the root using
 ---------------------------
@@ -83,11 +86,9 @@ gedit root-ca/root-ca.conf
 
 Inserting the code from the link into the root-ca.config
 ------------------------------------------------------------
-https://sites.google.com/view/talhasiddique/home#h.d7q75ywapa44
 Or from code: 1. root-ca.conf code at the bottom
 Save and exit
 
-:wq
 
 tree
 
@@ -114,11 +115,10 @@ gedit sub-ca.conf
 
 Inserting the code into sub-ca.config file
 ------------------------------------------
-https://sites.google.com/view/talhasiddique/home#h.1jp386wy0cba Or from 2. sub-ca.conf code
+2. sub-ca.conf code
 at the bottom
 Saving and exiting
 
-:wq
 
 Seeing the directory once again
 -------------------------------
@@ -203,8 +203,8 @@ cd ..
 
 
 
-echo "127.0.0.2 www.verysecureserver.com" >> /etc/hosts
-ping www.verysecureserver.com
+echo "127.0.0.9 www.redsmokie.com" >> /etc/hosts
+ping www.redsmokie.com
 
 Turning on the ssl port
 ---------------------------
@@ -243,15 +243,24 @@ tree ca
 
 finally copy to newcerts directory
 --------------------------------------
-cp /root/ca/root-ca/newcerts/21DE5190AF587104493F1750892E9B86.pem ~decoder/
-cp /root/ca/sub-ca/newcerts/ACB9E41C001BD6E31714199EF459CA4C.pem ~decoder/
+cp /root/ca/root-ca/newcerts/7C9E7E591F5E0B111353CA0A5318019E.pem ~monowar/
+cp /root/ca/sub-ca/newcerts/BA3505B7F5816A4B5F6821AEC0D6D7F5.pem ~monowar/
 
 
-cp /root/ca/root-ca/certs/ca.crt /home/decoder/certificate
-cp /root/ca/sub-ca/certs/sub-ca.crt /home/decoder/certificate/
-cp /root/ca/server/certs/chained.crt /home/decoder/certificate/
-cp /root/ca/server/certs/server.crt /home/decoder/certificate/
-cp /root/ca/server/private/server.key /home/decoder/certificate/
+cp /root/ca/root-ca/certs/ca.crt /home/monowar/certificate/
+cp /root/ca/sub-ca/certs/sub-ca.crt /home/monowar/certificate/
+cp /root/ca/server/certs/chained.crt /home/monowar/certificate/
+cp /root/ca/server/certs/server.crt /home/monowar/certificate/
+cp /root/ca/server/private/server.key /home/monowar/certificate/
+
+
+
+
+Check Any apache software has or not
+--------------------------------------------
+(Not check in root folder)
+systemctl status apache2
+
 
 
 Next go to this location
