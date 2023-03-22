@@ -273,25 +273,25 @@ gedit httpd-ssl.conf
 line 106
 ---------
 change server.crt location with your server.crt file location
-{106 SSLCertificateFile "/home/decoder/certificate/server.crt"}
+{106 SSLCertificateFile "/home/monowar/certificate/server.crt"}
 
 line 116
 ---------
 change server.key location with your server.key file location
-{116 SSLCertificateKeyFile "/home/decoder/certificate/server.key"}
+{116 SSLCertificateKeyFile "/home/monowar/certificate/server.key"}
 
 line 136
 ---------
 change full line with your location
-{136 SSLCACertificatePath "/home/decoder/certificate"}
+{136 SSLCACertificatePath "/home/monowar/certificate"}
 
 --------------------------
 For auto redirect to https
 ---------------------------
 <VirtualHost _default_:80>
-ServerName www.example.com:80
-ServerAdmin you@example.com
-Redirect permanent / https://www.verysecureserver.com
+ServerName www.smokie.com:80
+ServerAdmin monowar@redsmokie.com
+Redirect permanent / https://www.redsmokie.com
 </VirtualHost>
 
 
