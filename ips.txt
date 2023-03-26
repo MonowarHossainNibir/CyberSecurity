@@ -37,11 +37,11 @@ nano named.conf.options
 	dnssec-validation auto;
 	listen-on-v6 { any; };
 	recursion yes;
-	listen-on{10.0.2.15;};
+	listen-on{10.0.2.15;}; ---------------ipv4 ip
 	allow-transfer {none;};
 	
 	forwarders {
-	192.168.0.1;
+	10.0.2.2;  ------------- default ip
 
 	};
 
@@ -54,15 +54,15 @@ gedit named.conf.local
 [After the command edit next]
 
 //forward lookup zone
-zone "genibarta.com" IN{
+zone "redsmokie.com" IN{
 	type master;
-	file "/etc/bind/db.genibarta.com";
+	file "/etc/bind/db.redsmokie.com";
 };
 
 //reverse lookup zone
-zone "0.168.192.in-addr.arpa" IN {
+zone "2.0.10.in-addr.arpa" IN {
 	type master;
-	file "/etc/bind/db.0.168.192";
+	file "/etc/bind/db.2.0.10"; ------------ip 1st 3 digits in reverse way
 };
 
 [save and exit]
@@ -71,68 +71,68 @@ zone "0.168.192.in-addr.arpa" IN {
 named-checkconf
 ls
 # cat named.conf.local
-cp db.local db.genibarta.com
-gedit db.genibarta.com
-
+cp db.local db.redsmokie.com
+gedit db.redsmokie.com
 ------------------------------------------------------------------------------------
-[Replace full file with that text]
-
 ;
 ; BIND data file for local loopback interface
 ;
 $TTL	604800
-@	IN	SOA	ns1.genibarta.com. root.genibarta.com. (
+@	IN	SOA	ns1.redsmokie.com. root.redsmokie.com. (
 			      2		; Serial
 			 604800		; Refresh
 			  86400		; Retry
 			2419200		; Expire
 			 604800 )	; Negative Cache TTL
 ;
-@	IN	NS	ns1.genibarta.com.
-ns1	IN	A	192.168.0.20
-www	IN	A	192.168.0.20
-ftp	IN	A	192.168.0.20
+@	IN	NS	ns1.redsmokie.com.
+ns1	IN	A	10.0.2.15
+www	IN	A	10.0.2.15
+ftp	IN	A	10.0.2.15
 @	IN	MX	10	mail
-mail	IN	A	192.168.0.20
+mail	IN	A	10.0.2.15
 @	IN	AAAA	::1
+
+
 [Save and exit]
 -------------------------------------------------------------------------------------
+named-checkzone redsmokie.com db.redsmokie.com
 
-named-checkzone genibarta.com db.genibarta.com
-cp db.127 db.0.168.192
-gedit db.0.168.192
+
+cp db.127 db.2.0.10
+gedit db.2.0.10
 
 -------------------------------------------------------------------------------------
-[Replace full file with that text]
 ;
 ; BIND reverse data file for local loopback interface
 ;
 $TTL	604800
-@	IN	SOA	ns1.genibarta.com. root.genibarta.com. (
-			      1			; Serial
-			 604800			; Refresh
-			  86400			; Retry
-			2419200			; Expire
+@	IN	SOA	ns1.redsmokie.com. root.redsmokie.com. (
+			      1		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
 			 604800 )	; Negative Cache TTL
 ;
-@	IN	NS	ns1.genibarta.com.
-24	IN	PTR	ns1.genibarta.com.
-24	IN	PTR	www.genibarta.com.
-24	IN	PTR	ftp.genibarta.com.
-24	IN	PTR	mail.genibarta.com.
+@	IN	NS	ns1.redsmokie.com.
+24	IN	PTR	ns1.redsmokie.com.
+24	IN	PTR	www.redsmokie.com.
+24	IN	PTR	ftp.redsmokie.com.
+24	IN	PTR	mail.redsmokie.com.
 
 [Save and exit]
 ------------------------------------------------------------------------------------
 
-named-checkzone 0.168.192.in-addr.arpa db.0.168.192
+named-checkzone 2.0.10.in-addr.arpa db.2.0.10
 named-checkconf
-named-checkzone genibarta.com db.genibarta.com
-named-checkzone 0.168.192.in-addr.arpa db.0.168.192
+
+named-checkzone redsmokie.com db.redsmokie.com
+
 
 service bind9 restart
 service bind9 status
 
-nslookup www.genibarta.com
+nslookup www.redsmokie.com
 
 # cat /etc/resolv.conf
 rm /etc/resolv.conf
@@ -142,17 +142,17 @@ gedit /etc/resolv.conf
 -----------------------------------------
 [Replace last line with that text]
 
-nameserver 192.168.0.20
-nameserver 192.168.0.1
+nameserver 10.0.2.15
+nameserver 192.168.31.1
 search localdomain
 
 [Save and exit]
 -----------------------------------------
 
-nslookup www.genibarta.com
-ping www.genibarta.com
-# ping ftp.genibarta.com
-# ping mail.genibarta.com
+nslookup www.redsmokie.com
+ping www.redsmokie.com
+# ping ftp.redsmokie.com
+# ping mail.redsmokie.com
 
 
 Then configure your DNS from other os
