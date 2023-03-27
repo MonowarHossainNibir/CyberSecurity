@@ -1,6 +1,6 @@
-default ip 10.0.2.2
-ipv4 ip 10.0.2.15/24
-dns 192.168.31.1
+default ip 192.168.220.5
+ipv4 ip 192.168.220.229/24
+dns 192.168.220.5
 redsmokie.com
 
 
