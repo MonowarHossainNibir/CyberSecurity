@@ -1,9 +1,5 @@
 Configuration of Certification Authority and Implementation of Transport
 
-Layer Security over HTTP
-
-On linux terminal inside VirtualBox the following commands need to be given to generate Transport Layer
-Security over HTTP:
 
 
 
@@ -98,7 +94,7 @@ cd root-ca
 
 Generating root ca certificate
 --------------------------------
-openssl req -config root-ca.conf -key private/ca.key -new -x509 -days 7305 -sha256 -extensions v3_ca -out certs/ca.crt
+openssl req -config root-ca.conf -key private/ca.key -new -x509 -days 1095 -sha256 -extensions v3_ca -out certs/ca.crt
 
 Ensuring that the certificate has been created properly
 --------------------------------------------------------
@@ -134,7 +130,7 @@ cd -
 
 Signing the request of sub ca by root ca
 -----------------------------------------
-openssl ca -config root-ca.conf -extensions v3_intermediate_ca -days 3652 -notext -in ../sub-ca/csr/sub-ca.csr -out ../sub-ca/certs/sub-ca.crt
+openssl ca -config root-ca.conf -extensions v3_intermediate_ca -days 1095 -notext -in ../sub-ca/csr/sub-ca.csr -out ../sub-ca/certs/sub-ca.crt
 
 to confirm insert “y”
 
@@ -151,6 +147,10 @@ cat index
 Seeing detail
 --------------------------
 openssl x509 -noout -text -in ../sub-ca/certs/sub-ca.crt
+
+
+
+
 
 4. Configuring server
 Moving to server
@@ -204,7 +204,7 @@ cd ..
 
 
 
-echo "127.0.0.9 www.redsmokie.com" >> /etc/hosts
+echo "192.168.220.229 www.redsmokie.com" >> /etc/hosts
 ping www.redsmokie.com
 
 Turning on the ssl port
