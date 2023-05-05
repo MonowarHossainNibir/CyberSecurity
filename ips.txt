@@ -1,6 +1,6 @@
-default ip 192.168.220.5
-ipv4 ip 192.168.220.229/24
-dns 192.168.220.5
+default ip 192.168.135.36
+ipv4 ip 192.168.135.229/24
+dns 192.168.135.36
 redsmokie.com
 
 
@@ -18,7 +18,7 @@ gedit /etc/hosts
 ---------------------------------------------------------------------------
 [After the command edit next]
 
-10.0.2.15	ubuntu-VirtualBox.redsmokie.com	ubuntu-VirtualBox //this is your ip which you get from ip addr command
+192.168.135.229	monowar-VirtualBox.redsmokie.com	monowar-VirtualBox //this is your ip which you get from ip addr command
 
 [save and exit]
 
@@ -29,7 +29,7 @@ dnsdomainname
 hostname --fqdn
 
 cp named.conf.options named.conf.options.orig
-nano named.conf.options
+gedit named.conf.options
 
 [After the command edit next]
 
@@ -37,11 +37,11 @@ nano named.conf.options
 	dnssec-validation auto;
 	listen-on-v6 { any; };
 	recursion yes;
-	listen-on{10.0.2.15;}; ---------------ipv4 ip
+	listen-on{192.168.135.229;}; ---------------ipv4 ip
 	allow-transfer {none;};
 	
 	forwarders {
-	10.0.2.2;  ------------- default ip
+	192.168.135.36;  ------------- default ip
 
 	};
 
@@ -60,9 +60,9 @@ zone "redsmokie.com" IN{
 };
 
 //reverse lookup zone
-zone "2.0.10.in-addr.arpa" IN {
+zone "135.168.192.in-addr.arpa" IN {
 	type master;
-	file "/etc/bind/db.2.0.10"; ------------ip 1st 3 digits in reverse way
+	file "/etc/bind/db.135.168.192"; ------------ip 1st 3 digits in reverse way
 };
 
 [save and exit]
@@ -70,7 +70,7 @@ zone "2.0.10.in-addr.arpa" IN {
 
 named-checkconf
 ls
-# cat named.conf.local
+
 cp db.local db.redsmokie.com
 gedit db.redsmokie.com
 ------------------------------------------------------------------------------------
@@ -86,11 +86,11 @@ $TTL	604800
 			 604800 )	; Negative Cache TTL
 ;
 @	IN	NS	ns1.redsmokie.com.
-ns1	IN	A	10.0.2.15
-www	IN	A	10.0.2.15
-ftp	IN	A	10.0.2.15
+ns1	IN	A	192.168.135.229
+www	IN	A	192.168.135.229
+ftp	IN	A	192.168.135.229
 @	IN	MX	10	mail
-mail	IN	A	10.0.2.15
+mail	IN	A	192.168.135.229
 @	IN	AAAA	::1
 
 
@@ -99,8 +99,8 @@ mail	IN	A	10.0.2.15
 named-checkzone redsmokie.com db.redsmokie.com
 
 
-cp db.127 db.2.0.10
-gedit db.2.0.10
+cp db.127 db.135.168.192
+gedit db.135.168.192
 
 -------------------------------------------------------------------------------------
 ;
@@ -115,17 +115,16 @@ $TTL	604800
 			 604800 )	; Negative Cache TTL
 ;
 @	IN	NS	ns1.redsmokie.com.
-24	IN	PTR	ns1.redsmokie.com.
-24	IN	PTR	www.redsmokie.com.
-24	IN	PTR	ftp.redsmokie.com.
-24	IN	PTR	mail.redsmokie.com.
+36	IN	PTR	ns1.redsmokie.com.
+36	IN	PTR	www.redsmokie.com.
+36	IN	PTR	ftp.redsmokie.com.
+36	IN	PTR	mail.redsmokie.com.
 
 [Save and exit]
 ------------------------------------------------------------------------------------
 
-named-checkzone 2.0.10.in-addr.arpa db.2.0.10
+named-checkzone 135.168.192.in-addr.arpa db.135.168.192
 named-checkconf
-
 named-checkzone redsmokie.com db.redsmokie.com
 
 
@@ -142,8 +141,8 @@ gedit /etc/resolv.conf
 -----------------------------------------
 [Replace last line with that text]
 
-nameserver 10.0.2.15
-nameserver 192.168.31.1
+nameserver 192.168.135.229
+nameserver 192.168.135.36
 search localdomain
 
 [Save and exit]
