@@ -207,7 +207,7 @@ cd ..
 
 
 
-echo "192.168.220.229 www.redsmokie.com" >> /etc/hosts
+echo "192.168.135.229 www.redsmokie.com" >> /etc/hosts
 ping www.redsmokie.com
 
 Turning on the ssl port
@@ -247,8 +247,8 @@ tree ca
 
 finally copy to newcerts directory
 --------------------------------------
-cp /root/ca/root-ca/newcerts/7C9E7E591F5E0B111353CA0A5318019E.pem ~monowar/
-cp /root/ca/sub-ca/newcerts/BA3505B7F5816A4B5F6821AEC0D6D7F5.pem ~monowar/
+cp /root/ca/root-ca/newcerts/5C957F67BFB1892E39AF99A7CB30A40A.pem ~monowar/
+cp /root/ca/sub-ca/newcerts/0EAE4CFD39C2C3156FDD7E85C8997B9C.pem ~monowar/
 
 
 cp /root/ca/root-ca/certs/ca.crt /home/monowar/certificate/
@@ -291,7 +291,7 @@ change full line with your location
 
 --------------------------
 For auto redirect to https
----------------------------
+--------------------------- from line 82
 <VirtualHost _default_:80>
 ServerName www.smokie.com:80
 ServerAdmin monowar@redsmokie.com
