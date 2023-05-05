@@ -186,7 +186,10 @@ ls
 Now, concating sub-ca.crt and server.crt and naming the new file chained.crt
 -----------------------------------------------------------------------------
 {{cat server.crt ../../sub-ca/certs/sub-ca.crt > chained.crt}}
-cat /root/ca/root-ca/certs/ca.crt /root/ca/sub-ca/certs/sub-ca.crt /root/ca/server/certs/server.crt >> /home/monowar/certificate/chained.crt
+{{cat /root/ca/root-ca/certs/ca.crt /root/ca/sub-ca/certs/sub-ca.crt /root/ca/server/certs/server.crt >> /home/monowar/certificate/chained.crt}}
+
+cat /root/ca/root-ca/certs/ca.crt /root/ca/sub-ca/certs/sub-ca.crt /root/ca/server/certs/server.crt > chained.crt
+
 
 Seeing the change
 --------------------
