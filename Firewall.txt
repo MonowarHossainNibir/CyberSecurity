@@ -18,5 +18,8 @@ ufw allow 80
 ufw allow 443
 ufw allow 53
 
+6. check firewall update
+sudo ufw show added
+
 
 sudo netstat -tulpn | grep LISTEN
