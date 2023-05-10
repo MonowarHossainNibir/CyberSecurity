@@ -184,11 +184,9 @@ ls
 → We can see that the server.crt file has been generated
 
 Now, concating sub-ca.crt and server.crt and naming the new file chained.crt
------------------------------------------------------------------------------
-{{cat server.crt ../../sub-ca/certs/sub-ca.crt > chained.crt}}
-{{cat /root/ca/root-ca/certs/ca.crt /root/ca/sub-ca/certs/sub-ca.crt /root/ca/server/certs/server.crt >> /home/monowar/certificate/chained.crt}}
+----------------------------------------------------------------------------
 
-cat /root/ca/root-ca/certs/ca.crt /root/ca/sub-ca/certs/sub-ca.crt /root/ca/server/certs/server.crt > chained.crt
+cat /root/ca/server/certs/server.crt /root/ca/sub-ca/certs/sub-ca.crt /root/ca/root-ca/certs/ca.crt  > chained.crt
 
 
 Seeing the change
@@ -277,7 +275,7 @@ gedit httpd-ssl.conf
 line 106
 ---------
 change server.crt location with your server.crt file location
-{106 SSLCertificateFile "/home/monowar/certificate/server.crt"}
+{106 SSLCertificateFile "/home/monowar/certificate/chained.crt"}
 
 line 116
 ---------
