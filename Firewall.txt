@@ -22,4 +22,7 @@ ufw allow 53
 sudo ufw show added
 
 
-sudo netstat -tulpn | grep LISTEN
+ufw status 
+
+sudo ufw deny 22/tcp
+
