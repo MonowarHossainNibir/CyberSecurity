@@ -1,2 +1,17 @@
 sudo apt update
-sudo apt upgrade
+sudo apt-get install snort
+
+
+sudo snort -T -i enp0s8 -c /etc/snort/testsnort.conf //test configuration
+
+sudo snort -A console -q -i enp0s8 -c /etc/snort/testsnort.conf // run snort
+
+
+
+
+
+
+From Host PC
+
+sudo apt install hping3 -y
+sudo hping3 192.168.135.229 -q -n -d 120 -S -p 80 --flood --rand-source
