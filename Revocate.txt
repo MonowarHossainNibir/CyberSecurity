@@ -1,0 +1,8 @@
+Revoke certificate:
+•	cd sub-ca
+•	openssl ca -config sub-ca.conf -revoke ../server/certs/server.crt
+Add CRL to server 
+•	cd sub-ca
+•	nano crlnumber
+#type: 1002
+•	openssl ca -config sub-ca.conf -gencrl -out crl/rev.crl
